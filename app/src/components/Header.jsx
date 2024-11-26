@@ -48,11 +48,11 @@ export function Header(props) {
 }
     else {
         return (
-            <Navbar expand="lg" className="bg-body-tertiary" bg="light" data-bs-theme="light" sticky="top">
+            <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark" sticky="top">
                 <Container fluid>
                     <Navbar.Brand href="#home">
                     <img
-              src="./public/Logo.png"
+              src="./public/LMSlogo.png"
               width="30"
               height="30"
               className="d-inline-block align-top"

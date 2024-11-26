@@ -55,7 +55,7 @@ export function BookDetail(props) {
             collection(db, "loans"),
             {
                 bookId: book.id,
-                bookTitle: book.title,
+                bookTitle: book.Title,
                 userId: auth.uid,
                 time: serverTimestamp()
             }

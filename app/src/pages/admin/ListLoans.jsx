@@ -12,6 +12,8 @@ import { collection, getDocs, updateDoc, doc } from 'firebase/firestore'
 export function ListLoans(props) {
     const [loans, setLoans] = useState([])
 
+    let loaded = false
+
     const auth = useContext(AuthContext)
     const db = useContext(FirestoreContext)
 
@@ -35,10 +37,10 @@ const update = await updateDoc(ref,{onloan: false})
 }
 
     useEffect(() => {
-        if (!loans) {
+        if (!loaded) {
             getLoans()
         }
-    }, [loans])
+    }, [loaded])
 
     const BookLoans = loans.map((loan, key) => {
        
