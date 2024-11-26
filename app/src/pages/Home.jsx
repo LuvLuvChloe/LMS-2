@@ -38,17 +38,17 @@ export function Home(props) {
     // map each book to a component
     const Books = bookdata.map((book, key) => {
         return (
-            <Col md={3} key={key}>
-                <Card>
-                    <Card.Img 
+            <Col  md={3} key={key} className="mt-3" >
+                <Card style={{width:"100%"}}>
+                    <div className="text-center" ><Card.Img 
                     variant="top" 
                     src={"/book_covers/" + book.Cover}
                     style={{maxWidth:"100%"}}
-                    className="book-cover"
-                    />
+                    className="book cover"
+                    /></div>
                     <Card.Body>
-                        <Card.Title>{ book.Title }</Card.Title>
-                        <Card.Text>
+                        <Card.Title >{ book.Title }</Card.Title>
+                        <Card.Text >
                             A book by { book.Author }
                         </Card.Text>
                         <Button as={Link} variant="primary" className="w-100" to={"/detail/" + book.id}>
@@ -61,16 +61,19 @@ export function Home(props) {
     })
 
     return (
-        <Container fluid>
+        <Container fluid className="mt-3" >
+           
             <Row>
                 <Col>
-                    <h1>Library System</h1>
+                    <h1>Featured Books</h1>
                 </Col>
             </Row>
+           
             <Row>
                 {/* books here */}
                 { Books }
             </Row>
+            <Row className="mt-3" ></Row>
         </Container>
 
     )

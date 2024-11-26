@@ -103,7 +103,12 @@ export function BookDetail(props) {
                         <img className="w-100" src={"/book_covers/" + book.Cover} />
                     </Col>
                     <Col md={6}>
-                        <p>{book.Title} by {book.Author} </p>
+                    <p></p>
+                        <p> <b>Author:</b> {book.Author} </p>
+                        <p> <b>Publisher:</b> {book.Publisher} </p>
+                        <p> <b>Category:</b> {book.Category} </p>
+                        <p> <b>Language:</b> {book.Language} </p>
+                        <p> <b>Description:</b> {book.Description} </p>
                         <BorrowButton />
                     </Col>
                 </Row>

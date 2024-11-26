@@ -9,7 +9,7 @@ import { useContext, useState, useEffect } from 'react'
 
 import { collection, getDocs, updateDoc, doc } from 'firebase/firestore'
 
-export function ListLoan(props) {
+export function ListLoans(props) {
     const [loans, setLoans] = useState([])
 
     const auth = useContext(AuthContext)
@@ -35,10 +35,10 @@ const update = await updateDoc(ref,{onloan: false})
 }
 
     useEffect(() => {
-        if (!loaded) {
+        if (!loans) {
             getLoans()
         }
-    }, [loaded])
+    }, [loans])
 
     const BookLoans = loans.map((loan, key) => {
        
@@ -62,9 +62,19 @@ const update = await updateDoc(ref,{onloan: false})
     })
 
     return (
-        <Container>
-            <h1>List of Loans</h1>
+        <Container fluid>
+            
+            <Row><Col><h5> </h5></Col></Row>
+            <Row>
+                <Col>
+                    <h1>List of Loans</h1>
+                </Col>
+            </Row>
+            <Row><Col><h5> </h5></Col></Row>
+            <Row>
             {BookLoans}
+            </Row>
+            <Row><Col><h5> </h5></Col></Row>
         </Container>
     )
 }

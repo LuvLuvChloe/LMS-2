@@ -10,7 +10,7 @@ import { Logout } from './pages/Logout'
 import { Signin } from './pages/Signin'
 import { BookDetail } from './pages/BookDetail';
 import { AddBook } from './pages/admin/AddBook'
-import { ListLoans } from '.pages/admin/ListLoans'
+import { ListLoans } from './pages/admin/ListLoans';
 //firebase stuff
 import { firebaseConfig } from './config/Config'
 import { initializeApp } from "firebase/app"
