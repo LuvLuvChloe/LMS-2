@@ -6,9 +6,27 @@ import Col from 'react-bootstrap/Col'
 
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import {collection, getDocs} from "firebase/firestore"
+import { FirestoreContext } from '../contexts/FirestoreContext';
+import { useContext} from 'react'
 
 export function Signin (props) {
     const navigate = useNavigate()
+const db=useContext(FirestoreContext)
+
+const checkAdmin =async (userId) =>{
+//get all documents from "admin"
+const ref=collection ( db, "admin")
+const snapshot = await getDocs(ref)
+let result = false
+snapshot.forEach( (document) => {
+    const data = document.data()
+    if (data.adminID == userId){
+        result = true
+    }
+})
+return result 
+}
 
     const signInUser = (event) => {
         event.preventDefault()
@@ -16,7 +34,18 @@ export function Signin (props) {
         const email = formdata.get("email")
         const password = formdata.get("password")
         signInWithEmailAndPassword( props.authapp, email, password )
-        .then ( ( response ) => navigate("/"))
+        .then ( ( response ) => {
+            const userId = response.user.uid
+    
+            checkAdmin (userId).then((result)=>{
+                if(result == true) {
+                    props.admin(true)
+                }
+                else{
+                    props.admin(false)
+                }
+            })
+            navigate("/")})
         .catch( (error) => console.log(error) )
 
     }

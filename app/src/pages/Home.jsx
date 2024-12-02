@@ -25,7 +25,7 @@ export function Home(props) {
 
         })
         setBookData(booksArray)
-        console.log(booksArray)
+        //console.log(booksArray)
     }
 
     useEffect(() => {

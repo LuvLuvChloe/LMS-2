@@ -7,15 +7,23 @@ import Alert from "react-bootstrap/Alert"
 
 import { collection, addDoc, DocumentReference } from "firebase/firestore"
 import { FirestoreContext } from "../../contexts/FirestoreContext"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export function AddBook(props) {
-    const [ show, setShow ] = useState (false)
-    const [ message, setMessage ] = useState('')
+    const [show, setShow] = useState(false)
+    const [message, setMessage] = useState('')
 
     let alertType = 'success'
 
     const db = useContext(FirestoreContext)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (props.mode == false) {
+            navigate("/Signin")
+        }
+    }, [props.mode])
 
     const createBook = async (event) => {
         event.preventDefault()
@@ -27,6 +35,7 @@ export function AddBook(props) {
             Cover: fd.get('Cover'),
             Category: fd.get('Category'),
             Language: fd.get('Language'),
+            Description: fd.get('Description'),
             Active: true
         }
         const ref = collection(db, "Books")
@@ -34,17 +43,17 @@ export function AddBook(props) {
         if (docRef.id) {
             //console.log("successful")
             alertType = 'success'
-            setMessage ('Adding book was successful')
+            setMessage('Adding book was successful')
             event.target.reset()
-            setShow (true)
+            setShow(true)
         }
         else {
             console.log("failed")
             alertType = 'danger'
             setMessage('Adding book failed')
-            setShow (true)
+            setShow(true)
         }
-        setTimeout ( ()=> {setShow(false)}, 3000)
+        setTimeout(() => { setShow(false) }, 3000)
     }
 
     return (
@@ -68,6 +77,10 @@ export function AddBook(props) {
                         <Form.Group>
                             <Form.Label>Book Cover Image</Form.Label>
                             <Form.Control type="text" name="Cover" placeholder="Filename of cover image" required />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Book Description</Form.Label>
+                            <Form.Control type="text" name="Description" placeholder="Book Description" required />
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Book Category</Form.Label>
